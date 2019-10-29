@@ -522,6 +522,11 @@ impl Capture<Inactive> {
         }
     }
 
+    pub fn immediate(self, turn_on: bool) -> Capture<Inactive>{
+        unsafe { raw::pcap_set_immediate_mode(*self.handle, turn_on as libc::c_int) };
+        self
+    }
+
     /// Set the read timeout for the Capture. By default, this is 0, so it will block
     /// indefinitely.
     pub fn timeout(self, ms: i32) -> Capture<Inactive> {
